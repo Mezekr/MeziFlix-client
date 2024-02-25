@@ -1,0 +1,10 @@
+$color: rgb(240, 242, 245);
+$bgColor: rgb(12, 45, 71);
+
+body {
+	background-color: $bgColor;
+}
+.my-flix {
+	color: $color;
+	font-size: 1.5em;
+}
