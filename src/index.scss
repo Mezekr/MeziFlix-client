@@ -1,10 +1,23 @@
-$color: rgb(240, 242, 245);
+$color: rgb(245, 241, 240);
 $bgColor: rgb(12, 45, 71);
+$bgMovieList: rgb(65, 80, 100);
+$bgEmptyList: rgb(107, 102, 83);
 
 body {
 	background-color: $bgColor;
+	color: $color;
+	font-size: 1.2em;
 }
 .my-flix {
 	color: $color;
 	font-size: 1.5em;
+}
+.empty {
+	background-color: $bgEmptyList;
+}
+.movie-container {
+	font-size: 2em;
+	margin: auto;
+	padding: 1.2em;
+	background-color: $bgMovieList;
 }
