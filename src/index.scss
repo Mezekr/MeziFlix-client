@@ -2,6 +2,7 @@ $color: rgb(245, 241, 240);
 $bgColor: rgb(12, 45, 71);
 $bgMovieList: rgb(65, 80, 100);
 $bgEmptyList: rgb(107, 102, 83);
+$cardBorderColor: rgb(94, 89, 72);
 
 body {
 	background-color: $bgColor;
@@ -20,4 +21,27 @@ body {
 	margin: auto;
 	padding: 1.2em;
 	background-color: $bgMovieList;
+}
+
+.movie-card {
+	max-width: 300px;
+	margin: 0.8em auto;
+	padding: 0.1em 0.5em;
+	display: inline-block;
+	text-align: left;
+	border: 1px solid $cardBorderColor;
+	border-radius: 10px;
+	box-shadow: 5px 5px 5px rgba($color: #8a8383, $alpha: 0.5);
+}
+.movie-card img {
+	margin: 0.8em auto;
+	padding: 0.2em;
+	width: 290px;
+	height: 300px;
+	text-align: center;
+}
+button {
+	margin: 1em;
+	padding: 0.2em 1.5em;
+	font-size: 1.2em;
 }
