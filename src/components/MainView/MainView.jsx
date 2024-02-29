@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import MovieCard from '../MovieCard/MovieCard';
-// import MovieView from '../MovieView/MovieView';
+import MovieView from '../MovieView/MovieView';
 
 const MainView = () => {
 	const [movies, setMovies] = useState([
@@ -67,7 +67,7 @@ const MainView = () => {
 			ImagePath:
 				'https://imgs.search.brave.com/B1BBto3kaRG04gDcb0yd2t_fdUQP3ihdADlICULmbIE/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9pcnMu/d3d3Lndhcm5lcmJy/b3MuY29tL2tleWFy/dC1qcGVnL21vdmll/cy9tZWRpYS9icm93/c2VyL2xvcmRfb2Zf/dGhlX3JpbmdzX2Zl/bGxvd3NoaXBfb2Zf/dGhlX3JpbmdfMjAw/MHgzMDAwLmpwZw',
 			Featured: true,
-			ReleaseYear: new Date('2001-12-19'),
+			ReleaseYear: '2001-12-19',
 			Rating: 8.8,
 		},
 		{
@@ -90,10 +90,20 @@ const MainView = () => {
 			ImagePath:
 				'https://imgs.search.brave.com/vhVcVyPfRf5jGt1x6SH0lRUJuGsHsaDaVCraUUL_vrc/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL00v/TVY1Qk1EbGlNbU5o/TkRFdE9EVXlPUzAw/TWpObExUZ3hPREV0/TjJVM056SXhNR1Zr/WlRBMUwybHRZV2Rs/WGtFeVhrRnFjR2Rl/UVhWeU5qVTBPVFEw/T1RZQC5qcGc',
 			Featured: true,
-			ReleaseYear: new Date('2000-05-05'),
+			ReleaseYear: '2000-05-05',
 			Rating: 8.5,
 		},
 	]);
+
+	const [selectedMovie, setSelectedMovie] = useState(null);
+
+	if (selectedMovie)
+		return (
+			<MovieView
+				movie={selectedMovie}
+				onBackClick={() => setSelectedMovie(null)}
+			/>
+		);
 
 	return (
 		<div>
@@ -102,7 +112,15 @@ const MainView = () => {
 			) : (
 				<div className="movie-container">
 					{movies.map((movie) => {
-						return <MovieCard key={movie._id} movie={movie} />;
+						return (
+							<MovieCard
+								key={movie._id}
+								movie={movie}
+								OnMovieClick={(newSelectedMovie) =>
+									setSelectedMovie(newSelectedMovie)
+								}
+							/>
+						);
 					})}
 				</div>
 			)}
