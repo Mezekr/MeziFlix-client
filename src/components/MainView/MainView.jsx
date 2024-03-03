@@ -23,12 +23,32 @@ const MainView = () => {
 	const [selectedMovie, setSelectedMovie] = useState(null);
 
 	if (selectedMovie) {
+		const setSimilarMovies = movies.filter(
+			(movie) =>
+				movie.Genre.Name === selectedMovie.Genre.Name &&
+				movie.Title !== selectedMovie.Title
+		);
 		return (
 			<>
 				<MovieView
 					movie={selectedMovie}
 					onBackClick={() => setSelectedMovie(null)}
 				/>
+				<hr />
+				<h2>Similar Movies</h2>
+				<div>
+					{setSimilarMovies?.map((movie) => {
+						return (
+							<MovieCard
+								key={movie._id}
+								movie={movie}
+								OnMovieClick={(newSelectedMovie) =>
+									setSelectedMovie(newSelectedMovie)
+								}
+							/>
+						);
+					})}
+				</div>
 			</>
 		);
 	}
