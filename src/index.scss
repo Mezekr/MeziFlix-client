@@ -1,47 +1,172 @@
-$color: rgb(245, 241, 240);
+@import url('https://fonts.googleapis.com/css?family=Roboto+Slab:100,300,400,700');
+@import url('https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i');
+
+:root {
+	--font-roboto: 'Roboto Slab', serif;
+	--font-raleway: 'Raleway', sans-serif;
+}
+
+$color: rgb(16, 4, 1);
 $bgColor: rgb(12, 45, 71);
 $bgMovieList: rgb(65, 80, 100);
 $bgEmptyList: rgb(107, 102, 83);
-$cardBorderColor: rgb(94, 89, 72);
+$cardBorderColor: rgb(38, 92, 142);
+$listBgColor: rgb(224, 224, 235);
+
+* {
+	margin: 0;
+	border: 0;
+	box-sizing: border-box;
+}
 
 body {
 	background-color: $bgColor;
 	color: $color;
 	font-size: 1.2em;
+	font-family: var(--font-roboto);
 }
 .my-flix {
-	color: $color;
-	font-size: 1.5em;
+	padding: 1.5rem;
+	margin: 0 auto 0.5em;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+h1 {
+	font-size: 4rem;
+	letter-spacing: 0.9px;
+	background: linear-gradient(
+		180deg,
+		rgb(229, 207, 190) 50%,
+		rgba(249, 211, 180, 0) 100%
+	);
+	background-clip: text;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	width: fit-content;
 }
 .empty {
-	background-color: $bgEmptyList;
+	width: 100%;
+	margin-top: 3rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
+hr {
+	border: 2px solid rgb(228, 216, 216);
+}
+h2 {
+	font-size: 2rem;
+	margin: 0.3em auto;
+	color: rgb(230, 229, 229);
+	font-family: var(--font-raleway);
+}
+
 .movie-container {
-	font-size: 2em;
-	margin: auto;
-	padding: 1.2em;
-	background-color: $bgMovieList;
+	width: 100%;
+	margin-top: 3rem;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+}
+.movies-list {
+	width: 280px;
+	margin: 1.5em auto;
+	padding: 0.1em 0 0.1em 0;
+	border-radius: 12px;
+	border: none;
+	box-shadow: 0px 13px 10px -7px rgba(0, 0, 0, 0.1);
+	background-color: $cardBorderColor;
+}
+.movies-list img {
+	padding: 0.1em;
+	width: 280px;
+	height: 320px;
+	border-radius: 12px 12px 0 0;
 }
 
 .movie-card {
-	max-width: 300px;
-	margin: 0.8em auto;
-	padding: 0.1em 0.5em;
-	display: inline-block;
-	text-align: left;
-	border: 1px solid $cardBorderColor;
-	border-radius: 10px;
-	box-shadow: 5px 5px 5px rgba($color: #8a8383, $alpha: 0.5);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	width: 310px;
+	margin: 1.5em auto;
+	padding: 0.1em 0 0.1em 0;
+
+	border-radius: 12px;
+	border: none;
+	box-shadow: 0px 13px 10px -7px rgba(0, 0, 0, 0.1);
+	background-color: $cardBorderColor;
+}
+
+.movie-card:hover {
+	box-shadow: 0px 30px 18px -8px rgba(0, 0, 0, 0.1);
+	transform: scale(1.05, 1.05);
 }
 .movie-card img {
-	margin: 0.8em auto;
-	padding: 0.2em;
-	width: 290px;
-	height: 300px;
-	text-align: center;
+	margin: 0 auto;
+	padding: 0.1em;
+	width: 310px;
+	height: 350px;
+	border-radius: 12px 12px 0 0;
+}
+
+.movie-card .movie-details {
+	background-color: rgb(82, 83, 83);
+	width: 100%;
+	padding: 0.4em;
+	margin: 0 auto;
+	text-align: left;
+}
+.movie-card span {
+	font-family: var(--font-roboto);
+	text-transform: uppercase;
+	font-size: 0.8em;
+	letter-spacing: 2px;
+	font-weight: 400;
+	color: rgb(244, 248, 247);
 }
 button {
-	margin: 1em;
-	padding: 0.2em 1.5em;
 	font-size: 1.2em;
+	margin: 0.2em auto;
+	padding: 0.2em 2em;
+	opacity: 0.6;
+	border-radius: 10px;
+	font-weight: 500;
+}
+button:hover {
+	box-shadow: 0px 30px 18px -8px rgba(0, 0, 0, 0.1);
+	transform: scale(1.05, 1.05);
+	opacity: 1;
+}
+
+@media screen and (max-width: 600px) {
+	.my-flix {
+		margin: 0.5em auto;
+		padding: 2.5rem 1rem;
+	}
+}
+
+@media screen and (max-width: 400px) {
+	.my-flix {
+		padding: 2rem 1rem;
+	}
+
+	h1 {
+		font-size: 3rem;
+	}
+
+	.movie-container {
+		margin-top: 2rem;
+	}
+
+	.movie-card {
+		width: 100%;
+		margin: 0.5rem;
+	}
 }
