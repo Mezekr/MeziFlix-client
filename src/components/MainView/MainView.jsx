@@ -5,13 +5,13 @@ import MovieView from '../MovieView/MovieView';
 // const MOVIES_API_URL = import.meta.env.REACT_APP_API_URL;
 // console.log(MOVIES_API_URL);
 
-const MOVIES_API_URL = 'https://meziflix-api-v1.onrender.com/movies';
+const MOVIES_API_URL = 'https://meziflix-api-v1.onrender.com/';
 
 const MainView = () => {
 	const [movies, setMovies] = useState([]);
 
 	const searchMovie = async () => {
-		const response = await fetch(`${MOVIES_API_URL}`);
+		const response = await fetch(`${MOVIES_API_URL}movies`);
 		const data = await response.json();
 		setMovies(data);
 	};
@@ -57,7 +57,7 @@ const MainView = () => {
 		<div>
 			{movies?.length <= 0 ? (
 				<div className="empty">
-					<h2> Movies List is Empty 😣.</h2>
+					<h2> loading...</h2>
 				</div>
 			) : (
 				<div className="movie-container">
