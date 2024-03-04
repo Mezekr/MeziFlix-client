@@ -12,6 +12,7 @@ $bgMovieList: rgb(65, 80, 100);
 $bgEmptyList: rgb(107, 102, 83);
 $cardBorderColor: rgb(38, 92, 142);
 $listBgColor: rgb(224, 224, 235);
+$formBgColor: rgb(0, 119, 179);
 
 * {
 	margin: 0;
@@ -143,6 +144,28 @@ button:hover {
 	box-shadow: 0px 30px 18px -8px rgba(0, 0, 0, 0.1);
 	transform: scale(1.05, 1.05);
 	opacity: 1;
+}
+form {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	justify-items: center;
+	margin: auto;
+	width: 420px;
+	border-radius: 10px;
+	background-color: $formBgColor;
+}
+label {
+	margin: 0.2em;
+	padding: 1em;
+	font-size: 1.5em;
+	color: white;
+	text-align: left;
+}
+label input {
+	margin-top: 0.3em;
+	padding: 1em;
+	width: 100%;
 }
 
 @media screen and (max-width: 600px) {
