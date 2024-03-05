@@ -6,7 +6,7 @@ function App() {
 	return (
 		<>
 			<div className="my-flix">
-				<h1>MeziFlix</h1>
+				<div>Welcome to MeziFlix Movies App 🥳🤗</div>
 			</div>
 			<MainView />
 		</>
