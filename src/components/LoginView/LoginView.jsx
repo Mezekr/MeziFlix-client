@@ -12,8 +12,8 @@ const LoginView = ({ onLogin }) => {
 		event.preventDefault();
 
 		const data = {
-			access: username,
-			secret: password,
+			Username: username,
+			Password: password,
 		};
 		fetch(`${MOVIES_API_URL}login`, {
 			method: 'POST',
@@ -22,11 +22,13 @@ const LoginView = ({ onLogin }) => {
 		})
 			.then((response) => response.json())
 			.then((data) => {
-				data.user
-					? (localStorage.setItem('user', data.user),
-					  localStorage.setItem('token', data.token),
-					  onLogin(data.user, data.token))
-					: alert('User not found');
+				if (data.user) {
+					localStorage.setItem('user', data.user),
+						localStorage.setItem('token', data.token),
+						onLogin(data.user, data.token);
+				} else {
+					alert('User not found');
+				}
 			})
 			.catch((err) => alert('Login failed ' + err));
 	};
@@ -59,7 +61,7 @@ const LoginView = ({ onLogin }) => {
 	);
 };
 
-LoginView.prototypes = {
+LoginView.rototypes = {
 	onLogin: PropTypes.func,
 };
 
