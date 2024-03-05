@@ -10,10 +10,13 @@ import SignupView from '../SignupView/SignupView';
 const MOVIES_API_URL = 'https://meziflix-api-v1.onrender.com/';
 
 const MainView = () => {
+	const storedUser = JSON.parse(localStorage.getItem('user'));
+	const storedToken = JSON.parse(localStorage.getItem('token'));
+
 	const [movies, setMovies] = useState([]);
 	const [selectedMovie, setSelectedMovie] = useState(null);
-	const [user, setUser] = useState('null');
-	const [token, setToken] = useState(null);
+	const [user, setUser] = useState(storedUser ? storedUser : null);
+	const [token, setToken] = useState(storedToken ? storedToken : null);
 
 	const searchMovie = async (token) => {
 		const response = await fetch(`${MOVIES_API_URL}movies`, {
@@ -98,6 +101,7 @@ const MainView = () => {
 				onClick={() => {
 					setUser(null);
 					setToken(null);
+					localStorage.clear();
 				}}
 			>
 				Logout

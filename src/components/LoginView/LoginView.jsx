@@ -23,7 +23,9 @@ const LoginView = ({ onLogin }) => {
 			.then((response) => response.json())
 			.then((data) => {
 				data.user
-					? onLogin(data.user, data.token)
+					? (localStorage.setItem('user', data.user),
+					  localStorage.setItem('token', data.token),
+					  onLogin(data.user, data.token))
 					: alert('User not found');
 			})
 			.catch((err) => alert('Login failed ' + err));
