@@ -17,10 +17,16 @@ const LoginView = ({ onLogin }) => {
 		};
 		fetch(`${MOVIES_API_URL}login`, {
 			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify(data),
-		}).then((response) => {
-			response.ok ? onLogin(username) : alert('Login failed');
-		});
+		})
+			.then((response) => response.json())
+			.then((data) => {
+				data.user
+					? onLogin(data.user, data.token)
+					: alert('User not found');
+			})
+			.catch((err) => alert('Login failed ' + err));
 	};
 	return (
 		<form onSubmit={handleSubmit}>

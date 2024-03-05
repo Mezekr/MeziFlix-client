@@ -13,18 +13,31 @@ const MainView = () => {
 	const [movies, setMovies] = useState([]);
 	const [selectedMovie, setSelectedMovie] = useState(null);
 	const [user, setUser] = useState('null');
+	const [token, setToken] = useState(null);
 
-	const searchMovie = async () => {
-		const response = await fetch(`${MOVIES_API_URL}movies`);
+	const searchMovie = async (token) => {
+		const response = await fetch(`${MOVIES_API_URL}movies`, {
+			headers: { Authorization: `Bearer ${token}` },
+		});
 		const data = await response.json();
 		setMovies(data);
 	};
 
 	useEffect(() => {
-		searchMovie();
-	}, []);
+		if (!token) return;
+		searchMovie(token);
+	}, [token]);
 
-	if (!user) return <LoginView onLogin={(user) => setUser(user)} />;
+	if (!user)
+		return (
+			<LoginView
+				onLogin={(user, token) => {
+					setUser(user);
+					setToken(token);
+				}}
+			/>
+		);
+	// else <SignupView />;
 
 	if (selectedMovie) {
 		const setSimilarMovies = movies.filter(
@@ -59,7 +72,7 @@ const MainView = () => {
 
 	return (
 		<>
-			<SignupView />
+			{/* <SignupView /> */}
 			<div>
 				{movies?.length <= 0 ? (
 					<div className="empty">
@@ -81,6 +94,14 @@ const MainView = () => {
 					</div>
 				)}
 			</div>
+			<button
+				onClick={() => {
+					setUser(null);
+					setToken(null);
+				}}
+			>
+				Logout
+			</button>
 		</>
 	);
 };
