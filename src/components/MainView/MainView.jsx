@@ -4,9 +4,6 @@ import MovieCard from '../MovieCard/MovieCard';
 import MovieView from '../MovieView/MovieView';
 import SignupView from '../SignupView/SignupView';
 
-// const MOVIES_API_URL = import.meta.env.REACT_APP_API_URL;
-// console.log(MOVIES_API_URL);
-
 const MOVIES_API_URL = 'https://meziflix-api-v1.onrender.com/';
 
 const MainView = () => {
