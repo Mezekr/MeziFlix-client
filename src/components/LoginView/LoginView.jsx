@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 
-// const MOVIES_API_URL = import.meta.env.REACT_APP_API_URL;
 const MOVIES_API_URL = 'https://meziflix-api-v1.onrender.com/';
 console.log(MOVIES_API_URL);
 const LoginView = ({ onLogin }) => {
