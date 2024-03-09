@@ -1,6 +1,7 @@
-import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Container } from 'react-bootstrap';
 import MainView from './components/MainView/MainView';
-import './index.scss';
+// import './index.scss';
 
 function App() {
 	return (
@@ -8,7 +9,9 @@ function App() {
 			<div className="my-flix">
 				<h1>MeziFlix</h1>
 			</div>
-			<MainView />
+			<Container>
+				<MainView />
+			</Container>
 		</>
 	);
 }
