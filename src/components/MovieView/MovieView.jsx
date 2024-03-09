@@ -1,31 +1,25 @@
 import PropTypes from 'prop-types';
+import { Button, Card, Row } from 'react-bootstrap';
 
 const MovieView = ({ movie, onBackClick }) => {
 	return (
-		<>
-			<div className="movie-card">
-				<img src={movie.ImagePath} alt={movie.Title} />
-				<div className="movie-details">
-					<div>
-						<span>Title: </span>
-						<span>{movie.Title}</span>
-					</div>
-					<div>
-						<span>Description: </span>
-						<span>{movie.Description}</span>
-					</div>
-					<div>
-						<span>Director: </span>
-						<span>{movie.Director.Name}</span>
-					</div>
-					<div>
-						<span>ReleaseYear: </span>
-						<span>{movie.ReleaseYear}</span>
-					</div>
-				</div>
-				<button onClick={onBackClick}>Back</button>
-			</div>
-		</>
+		<Row className="justify-content-md-center">
+			<Card style={{ width: '20rem' }}>
+				<Card.Img
+					src={movie.ImagePath}
+					alt={movie.Title}
+					className="w-100"
+				/>
+				<Card.Body>
+					<Card.Title>{movie.Title}</Card.Title>
+					<Card.Subtitle>{movie.Description}</Card.Subtitle>
+					<Card.Text>Director: {movie.Director.Name}</Card.Text>
+				</Card.Body>
+				<Button onClick={onBackClick} variant="primary">
+					Back
+				</Button>
+			</Card>
+		</Row>
 	);
 };
 MovieView.propTypes = {
