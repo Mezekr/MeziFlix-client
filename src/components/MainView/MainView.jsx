@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Button, Col, Row } from 'react-bootstrap';
 import LoginView from '../LoginView/LoginView';
 import MovieCard from '../MovieCard/MovieCard';
 import MovieView from '../MovieView/MovieView';
@@ -28,85 +29,110 @@ const MainView = () => {
 		searchMovie(token);
 	}, [token]);
 
-	if (!user)
-		return (
-			<>
-				<LoginView
-					onLogin={(user, token) => {
-						setUser(user);
-						setToken(token);
-					}}
-				/>
-				<br />
-				<SignupView />
-			</>
-		);
-	// else <SignupView />;
-
-	if (selectedMovie) {
-		const setSimilarMovies = movies.filter(
-			(movie) =>
-				movie.Genre.Name === selectedMovie.Genre.Name &&
-				movie.Title !== selectedMovie.Title
-		);
-		return (
-			<>
-				<MovieView
-					movie={selectedMovie}
-					onBackClick={() => setSelectedMovie(null)}
-				/>
-				<hr />
-				<h2>Similar Movies</h2>
-				<div>
-					{setSimilarMovies?.map((movie) => {
-						return (
-							<MovieCard
-								key={movie._id}
-								movie={movie}
-								OnMovieClick={(newSelectedMovie) =>
-									setSelectedMovie(newSelectedMovie)
-								}
-							/>
-						);
-					})}
-				</div>
-			</>
-		);
-	}
-
 	return (
 		<>
-			{/* <SignupView /> */}
-			<div>
-				{movies?.length <= 0 ? (
+			<Row className="justify-content-md-center">
+				{!user ? (
+					<>
+						<Col md={5}>
+							<h2>Login</h2>
+							<LoginView
+								onLogin={(user, token) => {
+									setUser(user);
+									setToken(token);
+								}}
+							/>
+
+							<br />
+							<h2 style={{ color: 'white' }}>
+								Sign up as a new user below
+							</h2>
+							<br />
+							<SignupView />
+						</Col>
+					</>
+				) : selectedMovie ? (
+					<>
+						<Row className="justify-content-md-center">
+							<Col md={8}>
+								<MovieView
+									movie={selectedMovie}
+									onBackClick={() => setSelectedMovie(null)}
+								/>
+							</Col>
+						</Row>
+						<hr />
+						<h2>Similar Movies</h2>
+						<Row>
+							<Col className="mb-5" md={3}>
+								{movies
+									.filter(
+										(movie) =>
+											movie.Genre.Name ===
+												selectedMovie.Genre.Name &&
+											movie.Title !== selectedMovie.Title
+									)
+									.map((movie) => {
+										return (
+											<MovieCard
+												key={movie._id}
+												movie={movie}
+												OnMovieClick={(
+													newSelectedMovie
+												) =>
+													setSelectedMovie(
+														newSelectedMovie
+													)
+												}
+											/>
+										);
+									})}
+							</Col>
+							;
+						</Row>
+					</>
+				) : movies?.length <= 0 ? (
 					<div className="empty">
 						<h2> loading...</h2>
 					</div>
 				) : (
-					<div className="movie-container">
+					<>
 						{movies.map((movie) => {
 							return (
-								<MovieCard
+								<Col
 									key={movie._id}
-									movie={movie}
-									OnMovieClick={(newSelectedMovie) =>
-										setSelectedMovie(newSelectedMovie)
-									}
-								/>
+									className="mb-5"
+									sm={6}
+									md={4}
+									xl={3}
+								>
+									<MovieCard
+										movie={movie}
+										OnMovieClick={(newSelectedMovie) =>
+											setSelectedMovie(newSelectedMovie)
+										}
+									/>
+								</Col>
 							);
 						})}
-					</div>
+					</>
 				)}
-			</div>
-			<button
-				onClick={() => {
-					setUser(null);
-					setToken(null);
-					localStorage.clear();
-				}}
-			>
-				Logout
-			</button>
+			</Row>
+			<Row className="justify-content-md-center">
+				<Col md={3}>
+					<Button
+						onClick={() => {
+							setUser(null);
+							setToken(null);
+							localStorage.clear();
+						}}
+						variant="secondary"
+						size="lg"
+					>
+						Logout
+					</Button>
+				</Col>
+			</Row>
 		</>
 	);
 };
