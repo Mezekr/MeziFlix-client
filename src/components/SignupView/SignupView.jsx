@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Button, Form } from 'react-bootstrap';
 
 const MOVIES_API_URL = 'https://meziflix-api-v1.onrender.com/';
 
@@ -33,49 +34,46 @@ const SignupView = () => {
 	};
 
 	return (
-		<form onSubmit={handleSubmit}>
-			<label>
-				Username:
-				<input
+		<Form onSubmit={handleSubmit} style={{ color: 'white' }}>
+			<Form.Group ControlId="formUsername" className="mb-3">
+				<Form.Label>Username</Form.Label>
+				<Form.Control
 					type="text"
 					value={username}
-					onChange={(e) => setUsername(e.target.value)}
-					placeholder="Enter your Username"
+					onChage={(e) => setUsername(e.target.value)}
 					required
+					min-length={3}
 				/>
-			</label>
-			<label>
-				Password:
-				<input
+			</Form.Group>
+			<Form.Group ControlId="formPassword" className="mb-3">
+				<Form.Label>Password</Form.Label>
+				<Form.Control
 					type="password"
 					value={password}
 					onChange={(e) => setPassword(e.target.value)}
-					placeholder="Enter your password"
-					minLength={8}
-					required
 				/>
-			</label>
-			<label>
-				Email:
-				<input
+			</Form.Group>
+			<Form.Group controlId="formEmail" className="mb-3">
+				<Form.Label>Email</Form.Label>
+				<Form.Control
 					type="email"
 					value={email}
 					onChange={(e) => setEmail(e.target.value)}
-					placeholder="Enter your email"
 					required
 				/>
-			</label>
-			<label>
-				Birthdate:
-				<input
+			</Form.Group>
+			<Form.Group controlId="formBirthdate" className="mb-3">
+				<Form.Label>Birthdate</Form.Label>
+				<Form.Control
 					type="date"
 					value={birthdate}
 					onChange={(e) => setBirthdate(e.target.value)}
-					required
 				/>
-			</label>
-			<button type="submit">Signup</button>
-		</form>
+			</Form.Group>
+			<Button variant="primary" type="submit">
+				Sign up
+			</Button>
+		</Form>
 	);
 };
 
