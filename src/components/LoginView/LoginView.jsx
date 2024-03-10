@@ -51,9 +51,9 @@ const LoginView = ({ onLogin }) => {
 					type="password"
 					value={password}
 					onChange={(e) => setPassword(e.target.value)}
-					placeholder="Enter your Username"
+					placeholder="Enter your Password"
 					required
-					minLength={3}
+					minLength={8}
 				/>
 			</Form.Group>
 			<Button variant="primary" type="submit" size="lg">

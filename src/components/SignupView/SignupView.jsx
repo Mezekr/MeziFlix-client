@@ -41,6 +41,7 @@ const SignupView = () => {
 					type="text"
 					value={username}
 					onChage={(e) => setUsername(e.target.value)}
+					placeholder="Enter your Username"
 					required
 					min-length={3}
 				/>
@@ -51,6 +52,9 @@ const SignupView = () => {
 					type="password"
 					value={password}
 					onChange={(e) => setPassword(e.target.value)}
+					placeholder="Enter your Password"
+					required
+					minLength={8}
 				/>
 			</Form.Group>
 			<Form.Group controlId="formEmail" className="mb-3">
@@ -59,6 +63,7 @@ const SignupView = () => {
 					type="email"
 					value={email}
 					onChange={(e) => setEmail(e.target.value)}
+					placeholder="Enter your Email"
 					required
 				/>
 			</Form.Group>
