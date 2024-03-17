@@ -9,14 +9,13 @@ const UserDataUpdateView = ({ user }) => {
 	const [username, setUsername] = useState(user.Username);
 	const [email, setEmail] = useState(user.Email);
 	const [birthdate, setBirthdate] = useState(user.Birthday);
-	const [password, setPassword] = useState(user.Password);
 	const token = localStorage.getItem('token');
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		const data = {
 			Username: username,
-			Password: password,
+			// Password: password,
 			Email: email,
 			Birthday: birthdate
 				? new Date(birthdate).toISOString().substring(0, 10)
@@ -60,17 +59,6 @@ const UserDataUpdateView = ({ user }) => {
 						placeholder="Enter your Username"
 						required
 						min-length={5}
-					/>
-				</Form.Group>
-				<Form.Group ControlId="formPassword" className="mb-3">
-					<Form.Label>Password</Form.Label>
-					<Form.Control
-						type="password"
-						value={password}
-						onChange={(e) => setPassword(e.target.value)}
-						placeholder="Enter your Password"
-						required
-						minLength={8}
 					/>
 				</Form.Group>
 				<Form.Group controlId="formEmail" className="mb-3">
