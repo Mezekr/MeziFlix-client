@@ -16,7 +16,7 @@ const SignupView = () => {
 			Username: username,
 			Password: password,
 			Email: email,
-			Birthdate: birthdate,
+			Birthday: birthdate,
 		};
 		fetch(`${MOVIES_API_URL}users`, {
 			method: 'POST',
@@ -40,7 +40,7 @@ const SignupView = () => {
 				<Form.Control
 					type="text"
 					value={username}
-					onChage={(e) => setUsername(e.target.value)}
+					onChange={(e) => setUsername(e.target.value)}
 					placeholder="Enter your Username"
 					required
 					min-length={3}
