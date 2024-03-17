@@ -23,7 +23,7 @@ const LoginView = ({ onLogin }) => {
 			.then((response) => response.json())
 			.then((data) => {
 				if (data.user) {
-					localStorage.setItem('user', data.user),
+					localStorage.setItem('user', JSON.stringify(data.user)),
 						localStorage.setItem('token', data.token),
 						onLogin(data.user, data.token);
 				} else {
