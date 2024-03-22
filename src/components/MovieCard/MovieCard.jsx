@@ -9,7 +9,7 @@ const MovieCard = ({ movie, addFavMovie, removeFavMovie }) => {
 	const favMoviesID = useContext(favMoviesContext);
 
 	return (
-		<Card style={{ width: '15rem' }} className="h-100">
+		<Card className="h-100">
 			<Card.Img src={movie.ImagePath} alt={movie.Title} />
 			<Card.Body>
 				<Card.Title>Title: {movie.Title}</Card.Title>
