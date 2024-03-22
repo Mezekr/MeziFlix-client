@@ -8,6 +8,7 @@ import { Navbar } from '../Navbar/Navbar';
 import DeleteUserView from '../Profile/DeleteUserView';
 import ProfileView from '../Profile/ProfileView';
 import UserDataUpdateView from '../Profile/UserDataUpdateView';
+import SearchView from '../SearchView/SearchView';
 import SignupView from '../SignupView/SignupView';
 
 const MOVIES_API_URL = 'https://meziflix-api-v1.onrender.com/';
@@ -23,6 +24,7 @@ const MainView = () => {
 	const [token, setToken] = useState(storedToken ? storedToken : null);
 	const [favoriteMovies, setFavoriteMovies] = useState([]);
 	const [favMoviesID, setfavMoviesID] = useState([]);
+	const [searchTerm, setSearchTerm] = useState('');
 
 	const searchMovie = async (token) => {
 		const response = await fetch(`${MOVIES_API_URL}movies`, {
@@ -31,15 +33,34 @@ const MainView = () => {
 		const data = await response.json();
 		setMovies(data);
 	};
-
-	const onLogedOut = () => {
-		setUser(null), setToken(null), localStorage.clear();
-	};
-
 	useEffect(() => {
 		if (!token) return;
 		searchMovie(token);
 	}, [token]);
+
+	const searchResultat = [];
+
+	const searchAMovie = async (searchTerm) => {
+		if (!user) return;
+		const response = await fetch(`${MOVIES_API_URL}movies/${searchTerm}`, {
+			headers: { Authorization: `Bearer ${token}` },
+		});
+		const movieData = await response.json();
+		if (movieData) {
+			searchResultat.push(movieData);
+			setMovies(searchResultat);
+		} else {
+			alert(
+				`No film with title "${searchTerm}" found. Please check your spelling.\n The first letter must be capitalised.`
+			);
+			setSearchTerm('');
+			searchMovie(token);
+		}
+	};
+
+	const onLogedOut = () => {
+		setUser(null), setToken(null), localStorage.clear();
+	};
 
 	useEffect(() => {
 		if (!user) return;
@@ -114,11 +135,28 @@ const MainView = () => {
 
 	return (
 		<>
-			<Row>
-				<Col>
-					<Navbar user={user} onLogedOut={onLogedOut} />
-				</Col>
-			</Row>
+			{user ? (
+				<>
+					<Row>
+						<Col>
+							<Navbar user={user} onLogedOut={onLogedOut} />
+						</Col>
+					</Row>
+					<Row>
+						<SearchView
+							searchAMovie={searchAMovie}
+							searchTerm={searchTerm}
+							setSearchTerm={setSearchTerm}
+						/>
+					</Row>
+				</>
+			) : (
+				<Row>
+					<Col>
+						<Navbar user={user} onLogedOut={onLogedOut} />
+					</Col>
+				</Row>
+			)}
 			<Row className="justify-content-md-center">
 				<Routes>
 					<Route
@@ -185,7 +223,7 @@ const MainView = () => {
 									<Navigate to={'/login'} replace />
 								) : movies?.length <= 0 ? (
 									<div className="empty">
-										<h2> Movies List is empty!</h2>
+										<h2> Movies not found!</h2>
 									</div>
 								) : (
 									<>
@@ -207,7 +245,7 @@ const MainView = () => {
 									<Navigate to={'/login'} replace />
 								) : movies?.length <= 0 ? (
 									<div className="empty">
-										<h2> Movies List is empty!</h2>
+										<h2> The list of movies is empty.</h2>
 									</div>
 								) : (
 									<>
