@@ -15,7 +15,6 @@ const UserDataUpdateView = ({ user }) => {
 		event.preventDefault();
 		const data = {
 			Username: username,
-			// Password: password,
 			Email: email,
 			Birthday: birthdate
 				? new Date(birthdate).toISOString().substring(0, 10)
