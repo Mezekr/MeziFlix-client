@@ -21,8 +21,6 @@ const UserDataUpdateView = ({ user }) => {
 				: null,
 		};
 
-		console.log(data);
-		console.log(username);
 		fetch(`${MOVIES_API_URL}users/${username}`, {
 			method: 'PUT',
 			headers: {
