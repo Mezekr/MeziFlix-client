@@ -16,7 +16,7 @@ const MOVIES_API_URL = 'https://meziflix-api-v1.onrender.com/';
 export const favMoviesContext = createContext([]);
 
 const MainView = () => {
-	const storedUser = JSON.stringify(localStorage.getItem('user'));
+	const storedUser = JSON.parse(localStorage.getItem('user'));
 	const storedToken = localStorage.getItem('token');
 
 	const [movies, setMovies] = useState([]);
@@ -62,8 +62,7 @@ const MainView = () => {
 		setUser(null), setToken(null), localStorage.clear();
 	};
 
-	useEffect(() => {
-		if (!user) return;
+	const getUser = (user) => {
 		fetch(`${MOVIES_API_URL}users/${user.Username}`, {
 			headers: { Authorization: `Bearer ${token}` },
 		})
@@ -81,6 +80,11 @@ const MainView = () => {
 				}
 			})
 			.catch((err) => console.error(err));
+	};
+
+	useEffect(() => {
+		if (!token) return;
+		getUser(user);
 	}),
 		[token, movies, user];
 
