@@ -23,7 +23,7 @@ const LoginView = ({ onLogin }) => {
 			.then((response) => response.json())
 			.then((data) => {
 				if (data.user) {
-					localStorage.setItem('user', data.user),
+					localStorage.setItem('user', JSON.stringify(data.user)),
 						localStorage.setItem('token', data.token),
 						onLogin(data.user, data.token);
 				} else {
@@ -51,9 +51,9 @@ const LoginView = ({ onLogin }) => {
 					type="password"
 					value={password}
 					onChange={(e) => setPassword(e.target.value)}
-					placeholder="Enter your Username"
+					placeholder="Enter your Password"
 					required
-					minLength={3}
+					minLength={8}
 				/>
 			</Form.Group>
 			<Button variant="primary" type="submit" size="lg">

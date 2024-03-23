@@ -16,7 +16,7 @@ const SignupView = () => {
 			Username: username,
 			Password: password,
 			Email: email,
-			Birthdate: birthdate,
+			Birthday: birthdate,
 		};
 		fetch(`${MOVIES_API_URL}users`, {
 			method: 'POST',
@@ -40,7 +40,8 @@ const SignupView = () => {
 				<Form.Control
 					type="text"
 					value={username}
-					onChage={(e) => setUsername(e.target.value)}
+					onChange={(e) => setUsername(e.target.value)}
+					placeholder="Enter your Username"
 					required
 					min-length={3}
 				/>
@@ -51,6 +52,9 @@ const SignupView = () => {
 					type="password"
 					value={password}
 					onChange={(e) => setPassword(e.target.value)}
+					placeholder="Enter your Password"
+					required
+					minLength={8}
 				/>
 			</Form.Group>
 			<Form.Group controlId="formEmail" className="mb-3">
@@ -59,6 +63,7 @@ const SignupView = () => {
 					type="email"
 					value={email}
 					onChange={(e) => setEmail(e.target.value)}
+					placeholder="Enter your Email"
 					required
 				/>
 			</Form.Group>
