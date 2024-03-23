@@ -1,0 +1,98 @@
+.active {
+	background-color: rgb(94, 233, 136);
+}
+
+nav {
+	display: flex;
+	justify-content: space-between;
+	justify-items: center;
+	background-color: rgb(5, 124, 174);
+	color: white;
+	margin-bottom: 0.5rem;
+	position: sticky;
+	top: 0;
+}
+
+nav .logo {
+	font-size: 3rem;
+	font-weight: 600;
+	margin: 0.25rem;
+	letter-spacing: 0.9px;
+	background: linear-gradient(
+		180deg,
+		rgb(231, 143, 89) 75%,
+		rgba(0, 1, 2, 0) 100%
+	);
+	background-clip: text;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	width: fit-content;
+}
+nav ul {
+	display: flex;
+	margin: 0.1 rem;
+}
+
+nav ul li {
+	list-style: none;
+}
+
+nav ul li a {
+	display: block;
+	text-decoration: none;
+	margin: 0.5rem;
+	padding: 0.5rem 1.5rem;
+	color: white;
+	border-radius: 0.2rem;
+	font-size: 1.2rem;
+}
+
+nav ul li a:not(.active):hover {
+	background-color: rgb(4, 181, 246);
+}
+
+nav .menu {
+	display: none;
+	position: absolute;
+	top: 0.75rem;
+	right: 0.8rem;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 2rem;
+	width: 2.25rem;
+	margin-top: 0.6rem;
+}
+
+nav .menu span {
+	width: 100%;
+	height: 0.4rem;
+	background-color: white;
+	border-radius: 0.2rem;
+}
+
+@media (max-width: 760px) {
+	nav .menu {
+		display: flex;
+	}
+	nav {
+		flex-direction: column;
+		align-items: start;
+	}
+	nav ul {
+		display: none;
+		flex-direction: column;
+		width: 100%;
+		margin: auto;
+		padding: 0;
+	}
+	nav ul.open {
+		display: flex;
+	}
+	nav ul li {
+		width: 100%;
+		text-align: center;
+	}
+	nav ul li a {
+		padding: 0.5rem;
+	}
+}

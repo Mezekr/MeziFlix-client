@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
+import { Button, Form } from 'react-bootstrap';
 
 const MOVIES_API_URL = 'https://meziflix-api-v1.onrender.com/';
 console.log(MOVIES_API_URL);
@@ -22,7 +23,7 @@ const LoginView = ({ onLogin }) => {
 			.then((response) => response.json())
 			.then((data) => {
 				if (data.user) {
-					localStorage.setItem('user', data.user),
+					localStorage.setItem('user', JSON.stringify(data.user)),
 						localStorage.setItem('token', data.token),
 						onLogin(data.user, data.token);
 				} else {
@@ -32,10 +33,10 @@ const LoginView = ({ onLogin }) => {
 			.catch((err) => alert('Login failed ' + err));
 	};
 	return (
-		<form onSubmit={handleSubmit}>
-			<label>
-				Username:
-				<input
+		<Form onSubmit={handleSubmit} style={{ color: 'white' }}>
+			<Form.Group className="mb-3" ControlId="formUsername">
+				<Form.Label>Username:</Form.Label>
+				<Form.Control
 					type="text"
 					value={username}
 					onChange={(e) => setUsername(e.target.value)}
@@ -43,24 +44,26 @@ const LoginView = ({ onLogin }) => {
 					required
 					minLength={3}
 				/>
-			</label>
-			<label>
-				Password:
-				<input
+			</Form.Group>
+			<Form.Group className="mb-3" controlId="formPassword">
+				<Form.Label>Password</Form.Label>
+				<Form.Control
 					type="password"
 					value={password}
 					onChange={(e) => setPassword(e.target.value)}
-					placeholder="Enter your password"
-					minLength={8}
+					placeholder="Enter your Password"
 					required
+					minLength={8}
 				/>
-			</label>
-			<button type="submit">Login</button>
-		</form>
+			</Form.Group>
+			<Button variant="primary" type="submit" size="lg">
+				Login
+			</Button>
+		</Form>
 	);
 };
 
-LoginView.rototypes = {
+LoginView.propTypes = {
 	onLogin: PropTypes.func,
 };
 

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Button, Form } from 'react-bootstrap';
 
 const MOVIES_API_URL = 'https://meziflix-api-v1.onrender.com/';
 
@@ -15,7 +16,7 @@ const SignupView = () => {
 			Username: username,
 			Password: password,
 			Email: email,
-			Birthdate: birthdate,
+			Birthday: birthdate,
 		};
 		fetch(`${MOVIES_API_URL}users`, {
 			method: 'POST',
@@ -33,49 +34,51 @@ const SignupView = () => {
 	};
 
 	return (
-		<form onSubmit={handleSubmit}>
-			<label>
-				Username:
-				<input
+		<Form onSubmit={handleSubmit} style={{ color: 'white' }}>
+			<Form.Group ControlId="formUsername" className="mb-3">
+				<Form.Label>Username</Form.Label>
+				<Form.Control
 					type="text"
 					value={username}
 					onChange={(e) => setUsername(e.target.value)}
 					placeholder="Enter your Username"
 					required
+					min-length={3}
 				/>
-			</label>
-			<label>
-				Password:
-				<input
+			</Form.Group>
+			<Form.Group ControlId="formPassword" className="mb-3">
+				<Form.Label>Password</Form.Label>
+				<Form.Control
 					type="password"
 					value={password}
 					onChange={(e) => setPassword(e.target.value)}
-					placeholder="Enter your password"
-					minLength={8}
+					placeholder="Enter your Password"
 					required
+					minLength={8}
 				/>
-			</label>
-			<label>
-				Email:
-				<input
+			</Form.Group>
+			<Form.Group controlId="formEmail" className="mb-3">
+				<Form.Label>Email</Form.Label>
+				<Form.Control
 					type="email"
 					value={email}
 					onChange={(e) => setEmail(e.target.value)}
-					placeholder="Enter your email"
+					placeholder="Enter your Email"
 					required
 				/>
-			</label>
-			<label>
-				Birthdate:
-				<input
+			</Form.Group>
+			<Form.Group controlId="formBirthdate" className="mb-3">
+				<Form.Label>Birthdate</Form.Label>
+				<Form.Control
 					type="date"
 					value={birthdate}
 					onChange={(e) => setBirthdate(e.target.value)}
-					required
 				/>
-			</label>
-			<button type="submit">Signup</button>
-		</form>
+			</Form.Group>
+			<Button variant="primary" type="submit">
+				Sign up
+			</Button>
+		</Form>
 	);
 };
 
