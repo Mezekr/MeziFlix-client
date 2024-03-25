@@ -83,10 +83,10 @@ const MainView = () => {
 	};
 
 	useEffect(() => {
-		if (!token) return;
+		if (!user) return;
 		getUser(user);
-	}),
-		[token, movies, user];
+	},
+		[token, movies, user])
 
 	const addFavMovie = (movieId) => {
 		if (!user) return;
