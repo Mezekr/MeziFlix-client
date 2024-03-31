@@ -1,5 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container } from 'react-bootstrap';
+import { ToastContainer } from 'react-toastify';
 import MainView from './components/MainView/MainView';
 
 function App() {
@@ -7,6 +8,7 @@ function App() {
 		<>
 			<Container fluid>
 				<MainView />
+				<ToastContainer position="top-center" autoClose={1000} />
 			</Container>
 		</>
 	);
