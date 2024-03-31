@@ -1,23 +1,28 @@
 import PropTypes from 'prop-types';
+import { useContext } from 'react';
 import { Button, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-// import favIcon from './../../assets/heart.svg';
-import { useContext } from 'react';
 import { favMoviesContext } from '../MainView/MainView';
 
 const MovieCard = ({ movie, addFavMovie, removeFavMovie }) => {
 	const favMoviesID = useContext(favMoviesContext);
 
 	return (
-		<Card className="h-100" style={{ width: '15rem' }}>
+		<Card className="h-100  bg-secondary text-white bg-opacity-75 )">
 			<Card.Img src={movie.ImagePath} alt={movie.Title} />
 			<Card.Body>
-				<Card.Title>Title: {movie.Title}</Card.Title>
-				<Card.Text>Director: {movie.Director.Name}</Card.Text>
+				<Card.Title>
+					<span className="d-block w-100 fs-3">{movie.Title}</span>
+				</Card.Title>
+				<Card.Subtitle>
+					<span className="d-block ">{movie.Director.Name}</span>
+				</Card.Subtitle>
 			</Card.Body>
 			<Card.Footer className="d-flex justify-content-between">
 				<Link to={`/movies/${encodeURIComponent(movie._id)}`}>
-					<Button variant="link">Open</Button>
+					<Button variant="link" className="d-inline p-2 bg-light">
+						Open
+					</Button>
 				</Link>
 
 				{!favMoviesID.includes(movie._id) ? (
@@ -32,7 +37,9 @@ const MovieCard = ({ movie, addFavMovie, removeFavMovie }) => {
 					</Button>
 				) : (
 					<Button
-						onClick={() => removeFavMovie(movie._id)}
+						onClick={() => {
+							removeFavMovie(movie._id);
+						}}
 						variant="light"
 						className="border-dark"
 					>
