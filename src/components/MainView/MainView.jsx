@@ -1,6 +1,8 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useMemo, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { Navigate, Route, Routes } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import LoginView from '../LoginView/LoginView';
 import MovieCard from '../MovieCard/MovieCard';
 import MovieView from '../MovieView/MovieView';
@@ -10,7 +12,6 @@ import ProfileView from '../Profile/ProfileView';
 import UserDataUpdateView from '../Profile/UserDataUpdateView';
 import SearchView from '../SearchView/SearchView';
 import SignupView from '../SignupView/SignupView';
-
 const MOVIES_API_URL = 'https://meziflix-api-v1.onrender.com/';
 
 export const favMoviesContext = createContext([]);
@@ -26,6 +27,7 @@ const MainView = () => {
 	const [favMoviesID, setfavMoviesID] = useState([]);
 	const [searchTerm, setSearchTerm] = useState('');
 
+	// search for all movies on DB
 	const searchMovie = async (token) => {
 		const response = await fetch(`${MOVIES_API_URL}movies`, {
 			headers: { Authorization: `Bearer ${token}` },
@@ -38,31 +40,9 @@ const MainView = () => {
 		searchMovie(token);
 	}, [token]);
 
-	const searchResultat = [];
-
-	const searchAMovie = async (searchTerm) => {
+	// search for a User from API/DB
+	useEffect(() => {
 		if (!user) return;
-		const response = await fetch(`${MOVIES_API_URL}movies/${searchTerm}`, {
-			headers: { Authorization: `Bearer ${token}` },
-		});
-		const movieData = await response.json();
-		if (movieData) {
-			searchResultat.push(movieData);
-			setMovies(searchResultat);
-		} else {
-			alert(
-				`No film with title "${searchTerm}" found. Please check your spelling.\n The first letter must be capitalised.`
-			);
-			setSearchTerm('');
-			searchMovie(token);
-		}
-	};
-
-	const onLogedOut = () => {
-		setUser(null), setToken(null), localStorage.clear();
-	};
-
-	const getUser = (user) => {
 		fetch(`${MOVIES_API_URL}users/${user.Username}`, {
 			headers: { Authorization: `Bearer ${token}` },
 		})
@@ -80,17 +60,31 @@ const MainView = () => {
 				}
 			})
 			.catch((err) => console.error(err));
-	};
+	}, [movies, token, user]);
+
+	const searchAMovie = useMemo(() => {
+		if (!movies) return;
+		console.log(movies);
+		console.log('searchTerm  ' + searchTerm);
+		return movies.filter((movie) => {
+			return movie.Title.toLowerCase().includes(searchTerm.toLowerCase());
+		});
+	}, [movies, searchTerm]);
 
 	useEffect(() => {
-		if (!user) return;
-		getUser(user);
-	},
-		[token, movies, user])
+		if (searchTerm) {
+			searchAMovie.length !== 0 ? setMovies(searchAMovie) : setMovies([]);
+		} else {
+			searchMovie(token);
+		}
+	}, [searchTerm]);
+
+	const onLogedOut = () => {
+		setUser(null), setToken(null), localStorage.clear();
+	};
 
 	const addFavMovie = (movieId) => {
 		if (!user) return;
-		console.log(favMoviesID);
 		if (!favMoviesID.includes(movieId)) {
 			fetch(`${MOVIES_API_URL}users/${user.Username}/movies/${movieId}`, {
 				method: 'PUT',
@@ -100,14 +94,25 @@ const MainView = () => {
 			})
 				.then((response) => response.json())
 				.then((data) => {
-					console.log('addFavMovie');
-					console.log(data), alert('Movie added successfully');
+					if (!data) {
+						setFavoriteMovies();
+						toast.warning('Movie not added successfully');
+					} else {
+						setFavoriteMovies(
+							movies.filter((m) =>
+								data['FavouriteMovies'].includes(m._id)
+							)
+						);
+						setfavMoviesID(data['FavouriteMovies']);
+						toast.success('Movie added successfully');
+					}
 				})
 				.catch((err) => console.error(err));
 		} else {
-			alert('Already added');
+			toast.info('Already added');
 		}
 	};
+
 	const removeFavMovie = (movieId) => {
 		if (!user) return;
 		if (favMoviesID.includes(movieId)) {
@@ -129,11 +134,11 @@ const MainView = () => {
 						);
 						setfavMoviesID(data['FavouriteMovies']);
 					}
-					alert('Movie removed successfully');
+					toast.success('Movie removed successfully');
 				})
 				.catch((err) => console.error(err));
 		} else {
-			alert('not on Fav yet!');
+			toast.info('not on Fav yet!');
 		}
 	};
 
