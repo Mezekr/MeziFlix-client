@@ -64,8 +64,6 @@ const MainView = () => {
 
 	const searchAMovie = useMemo(() => {
 		if (!movies) return;
-		console.log(movies);
-		console.log('searchTerm  ' + searchTerm);
 		return movies.filter((movie) => {
 			return movie.Title.toLowerCase().includes(searchTerm.toLowerCase());
 		});
