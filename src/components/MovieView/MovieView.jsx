@@ -37,7 +37,7 @@ const MovieView = ({ movies }) => {
 			<h2>Similar Movies</h2>
 			<hr />
 			<Row>
-				<Col className="mb-5" md={3}>
+				<Col className="mb-5" md={5}>
 					{movies
 						.filter(
 							(m) =>
