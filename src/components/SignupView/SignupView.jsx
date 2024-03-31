@@ -26,9 +26,12 @@ const SignupView = () => {
 			body: JSON.stringify(data),
 		})
 			.then((response) => {
-				response.ok
-					? alert('Signup successful') && window.location.reload()
-					: alert('Signup failed');
+				if (response.ok) {
+					alert(
+						'Signup successful. Please login with user new Login creadential'
+					);
+					window.location.href = '/login';
+				} else alert.error('Signup failed');
 			})
 			.catch((err) => alert('Something went wrong' + err));
 	};
@@ -75,6 +78,7 @@ const SignupView = () => {
 					onChange={(e) => setBirthdate(e.target.value)}
 				/>
 			</Form.Group>
+
 			<Button variant="primary" type="submit">
 				Sign up
 			</Button>
