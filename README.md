@@ -1,25 +1,43 @@
 # MeziFlix-client
 
-A Frontend client fro the MeziFlix Movie app.
+This is a frontend client for the MeziFlix movie app, which is the server-side of the application. The movies are stored in a MongoDB Atlas server and accessed through a RESTful API based on Node.js, deployed in Render. 
 
-# Features
+## Features and their corresponding React components/views.
+ ### MainView component
+  - Displays a list of movies's MovieCard componens
+  -  Search and filter for a movie or list of movies.
+  - Logout functionality
+  - Navigation to profile view
+  - Display navigation bar
+    
+### Navbar View
+  - provides links to the home, profile, and logout pages.
+  - Logout functionality
+  - Navigate to Profile view
+    
+ ### LoginView
+   - Allows users to log in with a username and password
+    
+  ### SignupView
+  -   Allows a user to create an account
+    
+  ### ProfileView 
+  - Dispays user data i.e Username, email, birthday
+  - Allows a user to update the user's login details (e.g. Username, email)
+  - Allows existing users to deregister
+    
+  ### Moviecard
+  - Display the movie poster, title, and director's name.
+  -  Lets the user open detailed view and see similar movies
+  - Allows a user to add/remove movies to/from the Favourite Movies list.
 
--   Displays a list of movies to a user
--   Allows a user to create an account
--   Allows a user to update the user's login details (e.g. Username, email)
--   Allows a user to delete user account
--   Allows a user to add movies to a list of favourite movies.
--   Allows users to add movies to a watchlist
+    
 
 # Developement Env and tools
-
-### React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
--   [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
--   [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-### DockerFile and Docker Compose
+  
+  ## Tech Stack
+  - React 
+  - vite
+  - API
+  - Docker and Docker Compose
+  - Javascript, HTML,CSS,SCSS
