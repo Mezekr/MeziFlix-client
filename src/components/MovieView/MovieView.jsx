@@ -34,10 +34,10 @@ const MovieView = ({ movies }) => {
 					</div>
 				</div>
 			</Row>
-			<h2>Similar Movies</h2>
+			<h3>Similar Movies</h3>
 			<hr />
 			<Row>
-				<Col className="mb-5" md={5}>
+				<Col className="mb-5" md={5} sm={6}>
 					{movies
 						.filter(
 							(m) =>

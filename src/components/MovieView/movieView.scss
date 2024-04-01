@@ -10,13 +10,13 @@
 	padding: 0.5em;
 	margin: 0.2em auto 2em;
 	color: white;
-	background: #143c55;
+	background: rgb(4, 26, 43);
 	box-shadow: -5px 5px 10px rgba(0, 0, 0, 0.7),
 		5px 5px 10px rgba(0, 0, 0, 0.7);
 }
 
 .movie-thumbnail {
-	width: 350px;
+	width: 460px;
 	overflow: hidden;
 }
 .movie-thumbnail img {
@@ -27,7 +27,7 @@
 	padding: 0.2em;
 }
 .movie-body {
-	width: 50%;
+	width: 100%;
 	padding: 2rem;
 	display: flex;
 	flex-direction: column;
@@ -66,10 +66,16 @@ p span {
 	background: #258df4;
 	color: #000;
 }
+
 h3 {
-	padding: 1.2rem 0;
 	display: block;
-	border-top: 1px dotted red;
+	font-size: 2.5rem;
+	margin: 0.1em auto;
+	padding: 0.5rem 0.2rem;
+	color: rgb(254, 254, 254);
+	text-align: left;
+	background-color: rgb(3, 10, 13);
+	margin-top: 1rem;
 }
 
 @media screen and (max-width: 600px) {
@@ -77,6 +83,9 @@ h3 {
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
+	}
+	.movie-thumbnail {
+		width: 310px;
 	}
 	.movie-thumbnail img {
 		height: 100%;
