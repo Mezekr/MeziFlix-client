@@ -3,7 +3,7 @@ import { Col, Row } from 'react-bootstrap';
 import searchIcon from './../../assets/searchIcon.svg';
 import './searchView.scss';
 
-const SearchView = ({ searchAMovie, searchTerm, setSearchTerm }) => {
+const SearchView = ({ searchTerm, setSearchTerm }) => {
 	return (
 		<Row>
 			<Col>
@@ -16,13 +16,7 @@ const SearchView = ({ searchAMovie, searchTerm, setSearchTerm }) => {
 							setSearchTerm(e.target.value);
 						}}
 					></input>
-					<img
-						src={searchIcon}
-						alt="search"
-						onClick={() => {
-							searchTerm ? searchAMovie(searchTerm) : '';
-						}}
-					/>
+					<img src={searchIcon} alt="search" />
 				</div>
 			</Col>
 		</Row>
@@ -30,7 +24,6 @@ const SearchView = ({ searchAMovie, searchTerm, setSearchTerm }) => {
 };
 
 SearchView.propTypes = {
-	searchAMovie: PropTypes.func,
 	searchTerm: PropTypes.string,
 	setSearchTerm: PropTypes.string,
 };

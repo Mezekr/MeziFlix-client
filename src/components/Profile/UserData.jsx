@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const UserData = ({ username, email, birthdate }) => {
 	return (
 		<>
-			<Row className="justify-content-md-center">
+			<Row className="justify-content-center">
 				<Card
 					style={{ width: '400px' }}
 					border="info"

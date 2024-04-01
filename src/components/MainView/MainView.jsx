@@ -1,4 +1,4 @@
-import { createContext, useEffect, useMemo, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -62,25 +62,12 @@ const MainView = () => {
 			.catch((err) => console.error(err));
 	}, [movies, token, user]);
 
-	const searchAMovie = useMemo(() => {
-		if (!movies) return;
-		return movies.filter((movie) => {
-			return movie.Title.toLowerCase().includes(searchTerm.toLowerCase());
-		});
-	}, [movies, searchTerm]);
-
-	useEffect(() => {
-		if (searchTerm) {
-			searchAMovie.length !== 0 ? setMovies(searchAMovie) : setMovies([]);
-		} else {
-			searchMovie(token);
-		}
-	}, [searchTerm]);
-
+	// reset user and token on logout
 	const onLogedOut = () => {
 		setUser(null), setToken(null), localStorage.clear();
 	};
 
+	// Add movie to favourites list
 	const addFavMovie = (movieId) => {
 		if (!user) return;
 		if (!favMoviesID.includes(movieId)) {
@@ -111,6 +98,7 @@ const MainView = () => {
 		}
 	};
 
+	// Remove film from Favourites list
 	const removeFavMovie = (movieId) => {
 		if (!user) return;
 		if (favMoviesID.includes(movieId)) {
@@ -151,7 +139,6 @@ const MainView = () => {
 					</Row>
 					<Row>
 						<SearchView
-							searchAMovie={searchAMovie}
 							searchTerm={searchTerm}
 							setSearchTerm={setSearchTerm}
 						/>
@@ -164,7 +151,7 @@ const MainView = () => {
 					</Col>
 				</Row>
 			)}
-			<Row className="justify-content-md-center">
+			<Row className="justify-content-center">
 				<Routes>
 					<Route
 						path="/Signup"
@@ -234,7 +221,7 @@ const MainView = () => {
 									</div>
 								) : (
 									<>
-										<Row className="justify-content-md-center">
+										<Row className="justify-content-sm-center">
 											<Col md={8}>
 												<MovieView movies={movies} />
 											</Col>
@@ -252,40 +239,48 @@ const MainView = () => {
 									<Navigate to={'/login'} replace />
 								) : movies?.length <= 0 ? (
 									<div className="empty">
-										<h2> The list of movies is empty.</h2>
+										<h2> The movies list is empty.</h2>
 									</div>
 								) : (
 									<>
-										{movies.map((movie) => {
-											return (
-												<Col
-													key={movie._id}
-													className="mb-5"
-													sm={6}
-													md={4}
-													lg={3}
-													xl={3}
-													xxl={2}
-												>
-													<favMoviesContext.Provider
-														value={favMoviesID}
+										{movies
+											.filter((movie) => {
+												return searchTerm === ''
+													? movie
+													: movie.Title.toLowerCase().includes(
+															searchTerm.toLowerCase()
+													  );
+											})
+											.map((movie) => {
+												return (
+													<Col
+														key={movie._id}
+														className="mb-5"
+														md={4}
+														xl={3}
+														xxl={2}
+														sm={6}
+														xs={12}
 													>
-														<MovieCard
-															movie={movie}
-															favMoviesID={
-																favMoviesID
-															}
-															addFavMovie={
-																addFavMovie
-															}
-															removeFavMovie={
-																removeFavMovie
-															}
-														/>
-													</favMoviesContext.Provider>
-												</Col>
-											);
-										})}
+														<favMoviesContext.Provider
+															value={favMoviesID}
+														>
+															<MovieCard
+																movie={movie}
+																favMoviesID={
+																	favMoviesID
+																}
+																addFavMovie={
+																	addFavMovie
+																}
+																removeFavMovie={
+																	removeFavMovie
+																}
+															/>
+														</favMoviesContext.Provider>
+													</Col>
+												);
+											})}
 									</>
 								)}
 							</>
