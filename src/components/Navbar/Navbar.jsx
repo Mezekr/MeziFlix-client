@@ -40,9 +40,6 @@ export const Navbar = ({ user, onLogedOut }) => {
 								Logout
 							</NavLink>
 						</li>
-						{/* <li>
-							<NavLink to={'/UserDataUpdateView'}>UserUpdate</NavLink>
-						</li> */}
 					</>
 				)}
 			</ul>
